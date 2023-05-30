@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   Box,
@@ -38,6 +38,7 @@ const defaultOrderObject = {
 
 const WriteOrder = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [orderObject, setOrderObject] = useState(defaultOrderObject);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -109,7 +110,8 @@ const WriteOrder = () => {
     event.preventDefault();
 
     dispatch(postOrder({ ...orderObject, id: id || uuidv4() }));
-    setOrderObject(defaultOrderObject);
+
+    navigate('/my-orders');
   };
 
   const onEdit = (orderItem) => {
