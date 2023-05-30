@@ -1,13 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store/store';
+import { Provider } from 'react-redux';
+
+import { ThemeProvider } from '@emotion/react';
+import { CssBaseline, createTheme } from '@mui/material';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ThemeProvider theme={darkTheme}>
+        <BrowserRouter>
+          <CssBaseline />
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 
